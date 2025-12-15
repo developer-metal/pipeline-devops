@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Metadata:
+  Author: Developer Metal
+  Description: Creacion Api Gateway con cloudformation
+  Version: "1.0"
+
+Resources:
+  S3BucketFrontend:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "expense-amzn-s3-poc-front-iac"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      VersioningConfiguration:
+        Status: Enabled
+      WebsiteConfiguration:
+        IndexDocument: "index.html"
+  S3BucketFrontendPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: 
+       Ref: S3BucketFrontend
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowPublicReadForWebsite
+            Effect: Allow
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: 
+              Fn::Sub: "${S3BucketFrontend.Arn}/*"
