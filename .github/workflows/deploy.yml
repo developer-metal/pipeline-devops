@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3 # Checkout the repository
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v3
         with:
           python-version: '3.12'
       - uses: aws-actions/setup-sam@v2
@@ -26,7 +26,7 @@ jobs:
         working-directory: frontend
       - name: Install Node.js dependencies
         run: npm ci
-        working-directory: frontend/frontend/expense-app-manager
+        working-directory: frontend/expense-app-manager
       - name: Build frontend
         run: npm run build
         working-directory: frontend/expense-app-manager
