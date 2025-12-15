@@ -16,6 +16,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+          role-to-assume: arn:aws:iam::370756268174:role/aws-sam-cli-managed-dev-pipel-PipelineExecutionRole-YbnUYfIaHQXY
+          role-session-name: sam-pipeline
       - name: Sam Build
         run: sam build
         working-directory: frontend
